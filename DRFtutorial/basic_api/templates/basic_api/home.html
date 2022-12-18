@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="{% static 'css/navigation.css' %}" rel="stylesheet">
+    <style>
+        body{
+            background-image: url("{% static 'images/cool_black.png' %}");
+            background-repeat: no-repeat;
+            height: 100%;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    {% extends "navigation_body.html" %}
+    
+        
+    </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Log in!</title>
+    {% load static %}
+    <link href="{% static 'css/navigation.css' %}" rel="stylesheet">
+    <style>
+        body{
+            background-image: url("https://img.freepik.com/premium-photo/image-planet-outer-space-mixed-media-elements-image-furnished-by-nasa_641298-3434.jpg");
+            background-repeat: no-repeat;
+            height: 100%;
+            background-size: cover;
+        }
+        .form-group{
+            text-align: justify;
+        }
+        /* Full-width inputs */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            }
+
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            }
+        .asteriskField{
+            color: red !important;
+        }
+        label{
+            color: whitesmoke;
+            font-size: larger;
+        }
+        h1{
+            text-align: center;
+            font-weight: bold;
+            color: aliceblue;
+        }
+        .text-center{
+            color: burlywood;
+        }
+    </style>
+</head>
+<body>
+        
+    
+    <div class="html-container">
+        <div class="html-section">
+          <div class="html-project">
+            <div class="navigation">
+              <nav>
+                <ul class="nav-type">
+                  <li><a href="#" target="_self" class="active">Home</a></li>
+                  <li><a href="#" target="_self" class="active1">About</a></li>
+                  <li><a href="#" target="_self" class="active2">Contact</a></li>
+                  <li><a href="#" target="_self" class="active2">register</a></li>
+                  <li><a href="#" target="_self" class="active3">Support</a></li>
+                  <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                    
+                    <li class="nav-item">
+                      <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+                    </li>
+              
+                    {% else %}
+              
+                    <li class="nav-item">
+                      <a class="nav-link" href="/login">Login</a>
+                    </li>
+              
+                    {% endif %}
+                    </ul>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>    
+        
+    {% block content %}      
+
+        {% load crispy_forms_tags %}
+
+        <!--Login--> 
+        <div class="container py-5" style="width: 450px;  margin: 0 auto; padding: 10px;">
+        <h1>Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ login_form|crispy }}
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        <p class="text-center">Don't have an account? <a href="/main/register/">Create an account</a>.</p>
+
+        </div>
+
+    {% endblock %}
+</body>
+</html>
